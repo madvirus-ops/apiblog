@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from rest_framework.response import Response 
 from . models import Product,Post
 from rest_framework.permissions import IsAuthenticated
@@ -23,12 +23,14 @@ from django.core.mail import send_mail
         
 #     return Response(data)
 
-class ApiGenerics(generics.GenericAPIView):
-    query_set = Post.objects.all()
+class ApiGenerics(generics.ListCreateAPIView):
+    serializer_class = PostSerial
+    queryset = Post.objects.all()
+    
     
 
 class ApiViewBlog(APIView):
-    permission_classes = {IsAuthenticated,}
+    # permission_classes = {IsAuthenticated,}
     def get(self,request,*args, **kwargs):
         posts = Post.objects.all()
         serializer = PostSerial(posts,many=True)
@@ -41,6 +43,116 @@ class ApiViewBlog(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
+
+def post_detail(request,year,month,day,post):
+    post = get_object_or_404(Post, slug=post,publish__year=year,publish__day=day,publish__month=month)
+    return render(request,'core/detail.html',{'post':post})
+
+def postlist(request):
+    posts = Post.objects.all()
+    return render(request,'core/list.html',{'posts':posts})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def sendinblue(request):
     if request.method == "POST":
