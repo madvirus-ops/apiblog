@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect,get_object_or_404
 from rest_framework.response import Response 
 from . models import Product,Post
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
-from rest_framework import generics 
+from rest_framework import generics,status
 from .serializers import PostSerial
 from .forms import sendmaill
 from django.core.mail import send_mail
@@ -26,11 +27,20 @@ from django.core.mail import send_mail
 class ApiGenerics(generics.ListCreateAPIView):
     serializer_class = PostSerial
     queryset = Post.objects.all()
+    authentication_classes = {TokenAuthentication,}
+    permission_classes = {IsAuthenticated,}
+
+class ApiGenericsPut(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = PostSerial
+    queryset = Post.objects.all()
+    authentication_classes = {TokenAuthentication,}
+    permission_classes = {IsAuthenticated,}
     
     
 
 class ApiViewBlog(APIView):
-    # permission_classes = {IsAuthenticated,}
+    authentication_classes = {TokenAuthentication,}
+    permission_classes = {IsAuthenticated,}
     def get(self,request,*args, **kwargs):
         posts = Post.objects.all()
         serializer = PostSerial(posts,many=True)
@@ -41,7 +51,8 @@ class ApiViewBlog(APIView):
         serializer = PostSerial(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+           # status = 200
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
 
 

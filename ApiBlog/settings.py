@@ -144,6 +144,10 @@ EMAIL_HOST_PASSWORD = '0JwIETLt4q7BxmY6'
 
 REST_FRAMEWORK ={
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES':[
+        'rest_framework.permissions.AllowAny',
     ]
 }
+
