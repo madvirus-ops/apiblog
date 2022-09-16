@@ -5,9 +5,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework import generics,status
-from .serializers import PostSerial
+from .serializers import PostSerial,UserSerial
 from .forms import sendmaill
 from django.core.mail import send_mail
+
+from core import serializers
 
 
 # import json
@@ -23,6 +25,9 @@ from django.core.mail import send_mail
 #         return Response(data)
         
 #     return Response(data)
+class CreateUser(generics.CreateAPIView):
+    serializer_class = UserSerial
+
 
 class ApiGenerics(generics.ListCreateAPIView):
     serializer_class = PostSerial
@@ -35,10 +40,18 @@ class ApiGenericsPut(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     authentication_classes = {TokenAuthentication,}
     permission_classes = {IsAuthenticated,}
-    
-    
 
-class ApiViewBlog(APIView):
+class PostDetail(APIView):
+    authentication_classes = {TokenAuthentication,}
+    permission_classes = {IsAuthenticated,}
+    def get(self, request, pk):
+        posts = get_object_or_404(Post, pk=pk)
+        if posts:
+            data = PostSerial(posts).data
+            return Response(data)
+        return Response(data.errors)   
+
+class PostListCreate(APIView):
     authentication_classes = {TokenAuthentication,}
     permission_classes = {IsAuthenticated,}
     def get(self,request,*args, **kwargs):
@@ -54,6 +67,23 @@ class ApiViewBlog(APIView):
            # status = 200
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def post_detail(request,year,month,day,post):

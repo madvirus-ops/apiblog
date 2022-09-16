@@ -4,7 +4,10 @@ from . import views
 app_name = 'core'
 urlpatterns = [
    # path('',views.home, name='home'),
-    path('create1',views.ApiViewBlog.as_view(),name="create1"),
+    path('list',views.PostListCreate.as_view(),name="list"),
+    path('post',views.PostListCreate.as_view(),name="post"),
+    path('detail/<int:pk>/',views.PostDetail.as_view(),name="detail"),
+    path('create-user',views.CreateUser.as_view(),name='create-user'),
     path('mail',views.sendinblue,name='mail'),
     path('api/token',obtain_auth_token,name='token'),
     path('create',views.ApiGenerics.as_view(),name='create'),
