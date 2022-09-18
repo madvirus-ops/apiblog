@@ -23,7 +23,6 @@ urlpatterns = [
     path('update',views.ApiGenerics.as_view(),name='update'),
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='detail'),
     path('list',views.postlist,name='list'),
-    path('docs/',schema_view),
-    path('api/docs/', include_docs_urls(title='Posts API')),
+    
 
 ]
