@@ -20,7 +20,9 @@ urlpatterns = [
     path('mail',views.sendinblue,name='mail'),
     path('api/token',obtain_auth_token,name='token'),
     path('create',views.ApiGenerics.as_view(),name='create'),
-    path('update/<int:pk>/',views.ApiGenericsPut.as_view(),name='update'),
+    path('retrieve/<int:pk>/',views.ApiGenericsret.as_view(),name='retrieve'),
+    path('update/<int:pk>/',views.ApiGenericsupd.as_view(),name='update'),
+    path('destroy/<int:pk>/',views.ApiGenericsdes.as_view(),name='destroy'),
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='detail'),
     path('list',views.postlist,name='list'),
     

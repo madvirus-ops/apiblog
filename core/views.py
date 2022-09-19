@@ -29,19 +29,45 @@ class CreateUser(generics.CreateAPIView):
     serializer_class = UserSerial
 
 
+
+
 class ApiGenerics(generics.ListCreateAPIView):
     serializer_class = PostSerial
     queryset = Post.objects.all()
     authentication_classes = {TokenAuthentication,}
     permission_classes = {IsAuthenticated,}
 
-class ApiGenericsPut(generics.RetrieveUpdateDestroyAPIView):
+
+
+class ApiGenericsret(generics.RetrieveAPIView):
     serializer_class = PostSerial
     queryset = Post.objects.all()
+    #this filed will come later
     # lookup_url_kwarg = 'pk'
-    authentication_classes = {TokenAuthentication,}
-    permission_classes = {IsAuthenticated,}
-    # lookup_field = 'pk'
+    # authentication_classes = {TokenAuthentication,}
+    # permission_classes = {IsAuthenticated,}
+    #this too
+    # ?lookup_field = 'pk'
+
+class ApiGenericsupd(generics.RetrieveUpdateAPIView):
+    serializer_class = PostSerial
+    queryset = Post.objects.all()
+    #this filed will come later
+    # lookup_url_kwarg = 'pk'
+    # authentication_classes = {TokenAuthentication,}
+    # permission_classes = {IsAuthenticated,}
+    #this too
+    # ?lookup_field = 'pk'
+
+class ApiGenericsdes(generics.RetrieveDestroyAPIView):
+    serializer_class = PostSerial
+    queryset = Post.objects.all()
+    #this filed will come later
+    # lookup_url_kwarg = 'pk'
+    # authentication_classes = {TokenAuthentication,}
+    # permission_classes = {IsAuthenticated,}
+    #this too
+    # ?lookup_field = 'pk'
 
 class PostDetail(APIView):
     authentication_classes = {TokenAuthentication,}
