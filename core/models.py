@@ -1,7 +1,9 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from .helpers import *
 
 
 # Create your models here.
@@ -23,7 +25,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     description =  models.CharField(max_length=255)
     content = models.TextField()
-    slug = models.SlugField(max_length=255,unique_for_date='publish')
+    slug = models.SlugField(max_length=255,unique_for_date='publish',null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     publish = models.DateTimeField(default=timezone.now)
     owner = models.ForeignKey(User,on_delete=models.CASCADE,related_name='Posts')
@@ -36,7 +38,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('core:detail',args=[self.publish.year,self.publish.month,self.publish.day,self.slug])
-
+ 
+    def save(self,*args,**kwargs):
+        self.slug =generate_slug(self.title)
+        super(Post, self).save(*args,**kwargs)
 
 
 class Comment(models.Model):

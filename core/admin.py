@@ -8,7 +8,7 @@ admin.site.register(sendMaill)
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title','description','owner','publish')
+    list_display = ('pk','title','description','owner','publish')
     search_fields= ('title','content')
     prepopulated_fields={'slug':('title',)}
     raw_id_fields= ('owner',)
