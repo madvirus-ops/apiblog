@@ -1,0 +1,33 @@
+0
+
+pypi package: qrcode
+
+from django.db.models.signals import pre_save
+import qrcode
+from django.core.files import File
+from io import BytesIO
+
+class Qrcode(models.Model):
+    qrcode = models.ImageField(upload_to="images/", blank=True)
+
+def pre_save_qrcode(sender, instance, *args, **kwargs):
+    qr = qrcode.QRCode(
+        version=15,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=4,
+        border=2,
+    )
+    qr_code_data = f'{instance.data_you_want_to_put.like s.id_card_no}'
+    qr.add_data(qr_code_data)
+    qr.best_fit(1)
+    qr.make(fit=False)
+    img = qr.make_image(fill_color="black", back_color="white")
+    file_name = 'qr-' + instance.id_card_no + '.png'
+    buffer = BytesIO()
+    img.save(buffer, 'PNG')
+    instance.qrcode.delete(save=False)  # delete previous image from media folder
+    instance.qrcode.save(file_name, File(buffer), save=False)
+    img.close()
+
+
+pre_save.connect(pre_save_qrcode, sender=Qrcode)
