@@ -38,8 +38,10 @@ class ApiGenerics(generics.ListCreateAPIView):
 class ApiGenericsPut(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerial
     queryset = Post.objects.all()
+    # lookup_url_kwarg = 'pk'
     authentication_classes = {TokenAuthentication,}
     permission_classes = {IsAuthenticated,}
+    # lookup_field = 'pk'
 
 class PostDetail(APIView):
     authentication_classes = {TokenAuthentication,}

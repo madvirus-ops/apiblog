@@ -20,7 +20,7 @@ urlpatterns = [
     path('mail',views.sendinblue,name='mail'),
     path('api/token',obtain_auth_token,name='token'),
     path('create',views.ApiGenerics.as_view(),name='create'),
-    path('update',views.ApiGenerics.as_view(),name='update'),
+    path('update/<int:pk>/',views.ApiGenericsPut.as_view(),name='update'),
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='detail'),
     path('list',views.postlist,name='list'),
     
