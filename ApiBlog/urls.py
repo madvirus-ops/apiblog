@@ -29,7 +29,8 @@ schema_view = get_swagger_view(title='Post API')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('core/',include('core.urls')),
-    path('docs/',schema_view),
-    path('api/docs/', include_docs_urls(title='Posts API')),
+    path('docs',schema_view),
+    path('', include_docs_urls(title='Posts API')),
+    # path('api/', include(router.urls))
     
 ]

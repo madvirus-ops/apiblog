@@ -24,6 +24,7 @@ class Product(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     description =  models.CharField(max_length=255)
+    image = models.ImageField(blank=True,null=True)
     content = models.TextField()
     slug = models.SlugField(max_length=255,unique_for_date='publish',null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)

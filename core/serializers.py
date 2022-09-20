@@ -7,7 +7,7 @@ from rest_framework.authtoken.models import Token
 class PostSerial(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['title','content','owner','id','slug',]
+        fields = ['title','content','owner','id','slug','image']
         
 
     # def post_exists(self,validated_data):

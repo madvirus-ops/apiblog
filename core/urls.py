@@ -1,5 +1,6 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
+
 from . import views 
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.documentation import include_docs_urls
@@ -7,6 +8,10 @@ from rest_framework.documentation import include_docs_urls
 
 
 
+# router = DefaultRouter()
+# # router.register(r'list',views..as_view())
+# # router.register(r'post',views.PostListCreate.as_view())
+# router.register(r'gen',views.ApiGenerics.as_view())
 
 schema_view = get_swagger_view(title='Post API')
 
