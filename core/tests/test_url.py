@@ -46,3 +46,24 @@ class PostAPITest(APITestCase):
         response = self.client.post(self.posts_urls,data,format='json')
         self.assertEqual(response.status_code,status.HTTP_201_CREATED)
         self.assertEqual(response.data['content'], 'post')
+
+class PostDetailTese(APITestCase):
+    posts_urls = reverse('create')
+    post_url = reverse('detail',args=[1])
+
+    def setUp(self):
+        self.user = User.objects.create(username='admin',password='admin',email='admin@admin.com')
+        self.token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+
+
+        data = {
+            "title":"MR",
+            "content":"post",
+            "owner":1,
+            'slug':""
+        }
+        response = self.client.post(self.posts_urls,data,format='json')
+    # def test_delete(self):
+    #     response = self.client.delete(self.post_url)
+    #     self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
