@@ -15,16 +15,16 @@ from core import serializers
 # import json
 
 # Create your views here.
-# @api_view(["GET","POST"])
-# def home(request):
-#     data_list = Product.objects.all()#
-#     data = {}
-#     if data_list:
-#         data['name'] = data_list.name
-#         data['price'] = data_list.price
-#         return Response(data)
+@api_view(["GET","POST"])
+def home(request):
+    data_list = Product.objects.all()#
+    data = {}
+    if data_list:
+        data['name'] = data_list.name
+        data['price'] = data_list.price
+        return Response(data)
         
-#     return Response(data)
+    return Response(data)
 class CreateUser(generics.CreateAPIView):
     serializer_class = UserSerial
 
