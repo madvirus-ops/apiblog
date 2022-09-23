@@ -21,21 +21,23 @@ urlpatterns = [
     path('mail',views.sendinblue,name='mail'),
 
 
-    path('list',views.PostListCreate.as_view(),name="list"),
-    path('post',views.PostListCreate.as_view(),name="post"),
+    path('list/',views.PostListCreate.as_view(),name="list"),
+    path('post/',views.PostListCreate.as_view(),name="post"),
 
 
     path('detail/<int:pk>/',views.PostDetail.as_view(),name="detail"),
-    path('create-user',views.CreateUser.as_view(),name='create-user'),
+    path('create-user/',views.CreateUser.as_view(),name='create-user'),
 
 
 
     path('api/token',obtain_auth_token,name='token'),
-    path('create',views.ApiGenerics.as_view(),name='create'),
+    path('create/',views.ApiGenerics.as_view(),name='create'),
+
+    
     path('retrieve/<int:pk>/',views.ApiGenericsret.as_view(),name='retrieve'),
     path('update/<int:pk>/',views.ApiGenericsupd.as_view(),name='update'),
     path('destroy/<int:pk>/',views.ApiGenericsdes.as_view(),name='destroy'),
-    path('destroy1/<int:pk>/',views.Postdestroy.as_view(),name='destroy1'),
+    
 
 
 

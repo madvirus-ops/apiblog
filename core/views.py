@@ -61,15 +61,17 @@ class ApiGenericsupd(generics.RetrieveUpdateAPIView):
     #this too
     # ?lookup_field = 'pk'
 
-class ApiGenericsdes(generics.DestroyAPIView):
+class ApiGenericsdes(generics.RetrieveDestroyAPIView):
     serializer_class = PostSerial
     queryset = Post.objects.all()
-    #this filed will come later
-    # lookup_url_kwarg = 'pk'
-    # authentication_classes = {TokenAuthentication,}
-    # permission_classes = {IsAuthenticated,}
-    #this too
-    # ?lookup_field = 'pk'
+
+    def destroy(self,request,*args,**kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response({"message":"post deleted"},status=status.HTTP_200_OK)
+
+    def perform_destroy(self,instance):
+        instance.delete()
 
 class PostDetail(APIView):
     authentication_classes = {TokenAuthentication,}
@@ -98,13 +100,7 @@ class PostListCreate(APIView):
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
 
-class Postdestroy(APIView):
-    authentication_classes = {TokenAuthentication,}
-    permission_classes = {IsAuthenticated,}
-    def delete(self,request,pk):
-        posts = Post.objects.get(pk=pk)
-        posts.delete()
-        return Response(serializer.data,status=status.HTTP_200_OK)
+
 
 
 
