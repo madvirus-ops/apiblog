@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
-
+from django.conf import settings
 from . import views 
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.documentation import include_docs_urls
@@ -43,3 +43,8 @@ urlpatterns = [
     
 
 ]
+
+
+
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

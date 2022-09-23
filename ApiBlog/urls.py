@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.documentation import include_docs_urls
 
@@ -34,3 +36,8 @@ urlpatterns = [
     # path('api/', include(router.urls))
     
 ]
+
+#to serve images anf other static files we use this settings ...
+#we first import static and settings as shown in lines 18/19
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -14,17 +14,19 @@ from core import serializers
 
 # import json
 
-# Create your views here.
-@api_view(["GET","POST"])
-def home(request):
-    data_list = Product.objects.all()#
-    data = {}
-    if data_list:
-        data['name'] = data_list.name
-        data['price'] = data_list.price
-        return Response(data)
-        
-    return Response(data)
+# # Create your views here.
+# @api_view(["GET","POST"])
+# def home(request):
+#     data_list = Product.objects.all()#
+#     data = {}
+#     if data_list:
+#         data['name'] = data_list.name
+#         data['price'] = data_list.price
+#         return Response(data)    
+#     return Response(data)
+
+
+
 class CreateUser(generics.CreateAPIView):
     serializer_class = UserSerial
 
@@ -85,7 +87,7 @@ class PostListCreate(APIView):
     def get(self,request,*args, **kwargs):
         posts = Post.objects.all()
         serializer = PostSerial(posts,many=True)
-        return Response(serializer.data)
+        return Response(serializer.data,status=status.HTTP_200_OK)
         
 
     def post(self,request,*args, **kwargs):
@@ -94,7 +96,7 @@ class PostListCreate(APIView):
             serializer.save()
            # status = 200
             return Response(serializer.data,status=status.HTTP_201_CREATED)
-        return Response(serializer.errors,status=status.HTTP_400_CREATED)
+        return Response(serializer.errors)
 
 
 
