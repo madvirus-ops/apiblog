@@ -1,4 +1,5 @@
 
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -24,7 +25,7 @@ class Product(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     description =  models.CharField(max_length=255)
-    image = models.ImageField(blank=True,null=True)
+    image = models.ImageField(blank=True,null=True,default="20220831_110444_wplkM8g.jpg")
     content = models.TextField()
     slug = models.SlugField(max_length=255,unique_for_date='publish',null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)

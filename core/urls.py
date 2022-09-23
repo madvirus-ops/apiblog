@@ -35,11 +35,12 @@ urlpatterns = [
     path('retrieve/<int:pk>/',views.ApiGenericsret.as_view(),name='retrieve'),
     path('update/<int:pk>/',views.ApiGenericsupd.as_view(),name='update'),
     path('destroy/<int:pk>/',views.ApiGenericsdes.as_view(),name='destroy'),
+    path('destroy1/<int:pk>/',views.Postdestroy.as_view(),name='destroy1'),
 
 
 
-    path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='detail'),
-    path('list',views.postlist,name='list'),
+    path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='detail-post'),
+    path('list-post',views.postlist,name='list-post'),
     
 
 ]
