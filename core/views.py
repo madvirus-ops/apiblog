@@ -33,12 +33,21 @@ class CreateUser(generics.CreateAPIView):
 
 
 
-class ApiGenerics(generics.ListCreateAPIView):
+class ApiGenerics(generics.CreateAPIView):
     serializer_class = PostSerial
     queryset = Post.objects.all()
     authentication_classes = {TokenAuthentication,}
     permission_classes = {IsAuthenticated,}
 
+    def get(self,request,*args,**kwargs):
+        return self.list(request,*args,**kwargs)
+
+    def post(self,request,*args,**kwargs):
+        self.create(request,*args,**kwargs)
+        return Response({"message":"Post created successfully","status":201},status=status.HTTP_201_CREATED)
+
+    def perform_create(self,serializer):
+        serializer.save()
 
 
 class ApiGenericsret(generics.RetrieveAPIView):
