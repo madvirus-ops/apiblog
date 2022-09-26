@@ -5,3 +5,6 @@ Learning django-rest
 
 ##for the streaks
 ## for the streaks
+
+
+# for the streaks day 2
