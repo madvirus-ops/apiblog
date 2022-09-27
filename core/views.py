@@ -44,6 +44,8 @@ class ApiGenerics(generics.CreateAPIView):
 
     def post(self,request,*args,**kwargs):
         self.create(request,*args,**kwargs)
+        data = {}
+        
         return Response({"message":"Post created successfully","status":201},status=status.HTTP_201_CREATED)
 
     def perform_create(self,serializer):
