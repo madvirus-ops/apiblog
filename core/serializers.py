@@ -8,6 +8,9 @@ class PostSerial(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ['title','content','owner','id','slug','image']
+
+        # def create(self,validated_data):
+        #     return Post.objects.create(validated_data,ignore_conflicts=False)
         
 
     # def post_exists(self,validated_data):
