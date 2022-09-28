@@ -44,7 +44,7 @@ class ApiGenerics(generics.CreateAPIView):
 
     def post(self,request,*args,**kwargs):
         self.create(request,*args,**kwargs)
-        semd_mail
+        semd_mail()
         return Response(self.data,status=status.HTTP_201_CREATED)
 
     def perform_create(self,serializer):
