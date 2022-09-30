@@ -33,6 +33,6 @@ blocks:
         - name: check
           commands:
             - python manage.py check --deploy
-        - name: style
+        - name: runserver
           commands:
-            - flake8 / --max-line-length=12
+            - python manage.py runserver
