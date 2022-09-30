@@ -24,7 +24,6 @@ blocks:
           - checkout
           - cache restore
           - pip install --cache-dir .pip_cache -r requirements.txt
-          - cd apiblog
           - python manage.py makemigrations
           - python manage.py migrate
           - python manage.py test
@@ -33,7 +32,10 @@ blocks:
           commands: []
         - name: check
           commands:
+<<<<<<< HEAD
             # - apiblog
+=======
+>>>>>>> 37e7bf0e85312dd2a0128d34db95d3ab2e93b80d
             - python manage.py check --deploy
         - name: style
           commands:
