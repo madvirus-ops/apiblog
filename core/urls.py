@@ -1,6 +1,7 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 from . import views 
 from rest_framework_swagger.views import get_swagger_view
 from rest_framework.documentation import include_docs_urls
@@ -44,6 +45,9 @@ urlpatterns = [
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='detail-post'),
     path('list-post',views.postlist,name='list-post'),
     
+
+    path('password-change',auth_views.PasswordChangeView.as_view(),name='password-change'),
+    path('password-change-done',auth_views.PasswordChangeDoneView.as_view(),name='password-change-done')
 
 ]
 

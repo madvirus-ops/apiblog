@@ -25,7 +25,7 @@ class Product(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     description =  models.CharField(max_length=255)
-    image = models.ImageField(blank=True,null=True,default="20220831_110444_wplkM8g.jpg")
+    image = models.ImageField(upload_to='post_images',blank=True,null=True,default="20220831_110444_wplkM8g.jpg")
     content = models.TextField()
     slug = models.SlugField(max_length=255,unique_for_date='publish',null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -60,6 +60,14 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
 
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profiles')
+    image = models.ImageField(upload_to='profile_image',blank=True,null=True,default="20220831_110444_wplkM8g.jpg")
+    bio = models.TextField()
+
+
+    def __str__(self):
+        return self.user.username +"  " + "profile"
 
 
 
