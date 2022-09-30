@@ -39,8 +39,8 @@ class ApiGenerics(generics.CreateAPIView):
     authentication_classes = {TokenAuthentication,}
     permission_classes = {IsAuthenticated,}
 
-    def get(self,request,*args,**kwargs):
-        return self.list(request,*args,**kwargs)
+    # def get(self,request,*args,**kwargs):
+    #     return self.list(request,*args,**kwargs)
 
     def post(self,request,*args,**kwargs):
         self.create(request,*args,**kwargs)

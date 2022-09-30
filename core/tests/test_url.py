@@ -17,7 +17,7 @@ class ApiUrlsTests(SimpleTestCase):
         self.assertEqual(resolve(url).func.view_class,ApiGenerics)
 
 class PostAPITest(APITestCase):
-    posts_urls = reverse('create')
+    posts_urls = reverse('list')
 
     def setUp(self):
         self.user = User.objects.create(username='admin',password='admin',email='admin@admin.com')
