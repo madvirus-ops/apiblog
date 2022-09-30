@@ -39,5 +39,4 @@ blocks:
             - python manage.py check --deploy
         - name: style
           commands:
-            - pip install flake8
             - flake8 apiblog/ --max-line-length=12
