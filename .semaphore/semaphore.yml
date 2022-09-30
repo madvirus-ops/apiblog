@@ -36,5 +36,3 @@ blocks:
         - name: runserver
           commands:
             - python manage.py runserver
-        - name: 'Job #4'
-          commands: []
