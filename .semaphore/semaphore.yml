@@ -33,7 +33,7 @@ blocks:
           commands: []
         - name: check
           commands:
-            - cd apiblog
+            # - apiblog
             - python manage.py check --deploy
         - name: style
           commands:
