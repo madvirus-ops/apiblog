@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from rest_framework.response import Response 
-from . models import Product,Post
+from . models import Product,Post, Profile
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework import generics,status
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from .serializers import PostSerial,UserSerial
 from .forms import sendmaill
 from django.core.mail import send_mail
@@ -122,7 +123,14 @@ class PostListCreate(APIView):
 
 
 
+#for creating without api
+class ProfileCreateView(CreateView):
+	model = Profile
+	fields = ['bio','image']
 
+	def form_valid(self,form):
+		form.instance.author = self.request.user
+		return super().form_valid(form)
 
 
 
