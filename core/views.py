@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib.auth.models import User
 from rest_framework.response import Response 
 from . models import Product,Post, Profile
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +10,7 @@ from django.views.generic import ListView,DetailView,CreateView,UpdateView,Delet
 from .serializers import PostSerial,UserSerial
 from .forms import sendmaill
 from django.core.mail import send_mail
+from .forms import ProfileForm
 
 from core import serializers
 
@@ -127,16 +129,17 @@ class PostListCreate(APIView):
 class ProfileCreateView(CreateView):
 	model = Profile
 	fields = ['bio','image']
-
+    # forms_class = ProfileForm
 	def form_valid(self,form):
 		form.instance.author = self.request.user
 		return super().form_valid(form)
 
 
+class ProfileView(DetailView):
+    model = User
+    context_object_name = "user" 
 
-
-
-
+    template_name = 'core/profile.html'
 
 
 
