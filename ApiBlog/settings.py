@@ -157,4 +157,4 @@ REST_FRAMEWORK ={
         'rest_framework.schemas.coreapi.AutoSchema',
 }
 
-LOGIN_URL = 'token'
+LOGIN_URL = 'login'

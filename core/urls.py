@@ -1,3 +1,4 @@
+from re import template
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
 from django.conf import settings
@@ -49,8 +50,9 @@ urlpatterns = [
     
 
     path('password-change',auth_views.PasswordChangeView.as_view(),name='password-change'),
-    path('password-change-done',auth_views.PasswordChangeDoneView.as_view(),name='password-change-done')
-
+    path('password-change-done',auth_views.PasswordChangeDoneView.as_view(),name='password-change-done'),
+    path('logout',auth_views.LogoutView.as_view()),
+    path('login',auth_views.LoginView.as_view(template_name='core/login.html'),name="login"),
 ]
 
 

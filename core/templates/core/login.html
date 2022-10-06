@@ -7,13 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-   <form action="" method="post">
-   
-    <img src="{{user.profiles.image.src}}" alt="">
-
+  
+   <form action="" method="post" enctype="multipart/form-data">
         {%csrf_token%}
         {{form.as_p}}
-    
     <button type="submit">submit</button>
    </form>
 </body>
