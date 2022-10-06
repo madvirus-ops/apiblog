@@ -29,10 +29,8 @@ blocks:
           - python manage.py test
       jobs:
         - name: test
-          commands: []
+          commands:
+            - python manage.py test
         - name: check
           commands:
             - python manage.py check --deploy
-        - name: runserver
-          commands:
-            - python manage.py runserver
