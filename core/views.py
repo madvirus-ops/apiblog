@@ -10,6 +10,7 @@ from django.views.generic import ListView,DetailView,CreateView,UpdateView,Delet
 from .serializers import PostSerial,UserSerial
 from .forms import sendmaill
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
 
 from core import serializers
@@ -140,6 +141,23 @@ class ProfileView(DetailView):
     context_object_name = "user" 
 
     template_name = 'core/profile.html'
+
+##this view handles the profile
+@login_required
+def ProfileFunc(request):
+    if request.method == "POST":
+        form = ProfileForm(request.POST,request.FILES,instance=request.user.profiles)
+        if form.is_valid():
+            form.save()
+            return Response({"status":"submitted"})
+        return Response(form.errors)
+    else:
+        form =ProfileForm(instance=request.user.profiles)
+        context = {
+            'form':form
+        }
+        return render(request, "core/profile_form.html",context)
+
 
 
 

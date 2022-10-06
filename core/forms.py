@@ -2,6 +2,7 @@
 from dataclasses import fields
 from django import forms
 from .models import sendMaill,Comment,Profile
+from core import models
 
 
 class sendmaill(forms.ModelForm):
@@ -15,6 +16,7 @@ class CommentForm(forms.ModelForm):
         fields = ('name','email','body')
         
 class ProfileForm(forms.ModelForm):
+    bio = forms.CharField()
     class Meta:
         model = Profile
-        fields = "__all__"
+        fields =('bio','image')

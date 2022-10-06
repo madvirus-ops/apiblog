@@ -41,6 +41,7 @@ urlpatterns = [
     
 
     path('create-profile',views.ProfileCreateView.as_view(),name='profile'),
+    path('create-p',views.ProfileFunc,name="cr-p"),
     path('profile/<int:pk>',views.ProfileView.as_view(),name='profile'),
 
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',views.post_detail,name='detail-post'),
